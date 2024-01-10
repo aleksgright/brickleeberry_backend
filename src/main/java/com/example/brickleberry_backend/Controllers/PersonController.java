@@ -26,6 +26,11 @@ public class PersonController {
         return personRepository.getPersonsPage(pageSize, pageNumber * pageSize);
     }
 
+    @GetMapping("/pageCount")
+    public int getPersonsPage(@RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return personRepository.getPersonsPagesCount(pageSize);
+    }
+
     @PostMapping("/add")
     public boolean addPerson(@RequestBody PersonRegisterDto personRegisterDto) {
         return personRepository.addPerson(personRegisterDto);

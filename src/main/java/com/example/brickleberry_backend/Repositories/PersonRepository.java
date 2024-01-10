@@ -40,13 +40,19 @@ public class PersonRepository {
         return this.jdbcTemplate.query(query, this::wrapPerson);
     }
 
+    public int getPersonsPagesCount(int pageSize) {
+        String rowCountSql = "SELECT ceiling(count(*)/" + pageSize + ") AS row_count FROM Person ";
+        Integer result = this.jdbcTemplate.queryForObject(rowCountSql, Integer.class);
+        return result == null ? 0 : result;
+    }
+
     public boolean deletePerson(int id) {
-        String sql = "DELETE FROM Person WHERE id =" + id;
+        String sql = "DELETE FROM Person WHERE id = ?";
         Object[] args = new Object[]{id};
         if (this.jdbcTemplate.update(sql, args) == 1) {
-            sql = "DELETE FROM Person_role WHERE person_id = " + id;
-            args = new Object[]{id};
-            return this.jdbcTemplate.update(sql, args) == 1;
+            sql = "DELETE FROM Person_role WHERE person_id = ?";
+            this.jdbcTemplate.update(sql, args);
+            return true;
         }
         return false;
     }
