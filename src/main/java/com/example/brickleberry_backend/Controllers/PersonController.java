@@ -1,5 +1,6 @@
 package com.example.brickleberry_backend.Controllers;
 
+import com.example.brickleberry_backend.Dtos.PersonRegisterDto;
 import com.example.brickleberry_backend.Entities.Person;
 import com.example.brickleberry_backend.Repositories.PersonRepository;
 import com.example.brickleberry_backend.Services.PersonService;
@@ -25,7 +26,12 @@ public class PersonController {
         return personRepository.getPersonsPage(pageSize, pageNumber * pageSize);
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/add")
+    public boolean addPerson(@RequestBody PersonRegisterDto personRegisterDto) {
+        return personRepository.addPerson(personRegisterDto);
+    }
+
+    @DeleteMapping("/delete")
     public boolean deletePerson(@RequestParam int id) {
         return personRepository.deletePerson(id);
     }

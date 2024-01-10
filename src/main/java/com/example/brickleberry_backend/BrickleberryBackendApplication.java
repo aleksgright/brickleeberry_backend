@@ -3,6 +3,7 @@ package com.example.brickleberry_backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//ssh -p 2222 s336504@helios.se.ifmo.ru -Y -L 5432:pg:8080
 @SpringBootApplication
 public class BrickleberryBackendApplication {
 
