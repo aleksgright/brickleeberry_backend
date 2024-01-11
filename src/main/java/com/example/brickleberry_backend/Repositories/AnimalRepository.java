@@ -24,10 +24,10 @@ public class AnimalRepository {
         return this.jdbcTemplate.query(query, this::wrapAnimal);
     }
 
-    public List<Animal> getAnimalsByTerritoryPaged(int territory_id, int limit, int offset) {
+    public List<Animal> getAnimalsByTerritoryPaged(int territoryId, int limit, int offset) {
         String query = "SELECT Animal_type.id, Animal_type.type_name, Animal_type.endangered, SUM(Animal_type_territory.animal_count)" +
                 " FROM Animal_type JOIN Animal_type_territory ON Animal_type.id = Animal_type_territory.animal_type_id " +
-                "WHERE Animal_type_territory.territory_id = " + territory_id +
+                "WHERE Animal_type_territory.territory_id = " + territoryId +
                 " GROUP BY Animal_type.id " +
                 " ORDER BY Animal_type.id " +
                 "  LIMIT " + limit +
@@ -37,7 +37,7 @@ public class AnimalRepository {
 
     private Animal wrapAnimal(ResultSet rs, int rowNum) throws SQLException {
         Animal a = new Animal();
-        a.setId(rs.getInt("id"));
+        a.setId(rs.getLong("id"));
         a.setTypeName(rs.getString("type_name"));
         a.setEndangered(rs.getBoolean("endangered"));
         a.setCount(rs.getInt("sum"));

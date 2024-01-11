@@ -57,9 +57,9 @@ public class PersonRepository {
                 "SELECT id FROM Role WHERE role_name = ?",
                 new Object[]{personRegisterDto.getRole()},
                 Integer.class);
-        Integer person_id = this.jdbcTemplate.queryForObject("INSERT INTO Person(name, surname)  VALUES(?, ?) RETURNING id",
+        Long person_id = this.jdbcTemplate.queryForObject("INSERT INTO Person(name, surname)  VALUES(?, ?) RETURNING id",
                 new Object[]{personRegisterDto.getName(), personRegisterDto.getSurname()},
-                Integer.class);
+                Long.class);
         return this.jdbcTemplate.update("INSERT INTO Person_role(person_id, role_id) VALUES(?, ?)",
                 person_id,
                 role_id) == 1;
@@ -67,7 +67,7 @@ public class PersonRepository {
 
     private Person wrapPerson(ResultSet rs, int rowNum) throws SQLException {
         Person p = new Person();
-        p.setId(rs.getInt("id"));
+        p.setId(rs.getLong("id"));
         p.setName(rs.getString("name"));
         p.setSurname(rs.getString("surname"));
         p.setLastname(rs.getString("lastname"));

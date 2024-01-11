@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Animal {
-    private int id;
+    private long id;
     private String typeName;
     private boolean endangered;
     private long count;
