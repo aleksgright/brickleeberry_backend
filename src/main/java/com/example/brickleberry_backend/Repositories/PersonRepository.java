@@ -49,19 +49,20 @@ public class PersonRepository {
     public boolean deletePerson(int id) {
         String sql = "DELETE FROM Person WHERE id = ?";
         Object[] args = new Object[]{id};
-        if (this.jdbcTemplate.update(sql, args) == 1) {
-            sql = "DELETE FROM Person_role WHERE person_id = ?";
-            this.jdbcTemplate.update(sql, args);
-            return true;
-        }
-        return false;
+        return this.jdbcTemplate.update(sql, args) == 1;
     }
 
     public boolean addPerson(PersonRegisterDto personRegisterDto) {
-        return this.jdbcTemplate.update("INSERT INTO Person(name, surname, lastname) VALUES(?, ?, ?)",
-                personRegisterDto.getName(),
-                personRegisterDto.getSurname(),
-                personRegisterDto.getRole()) == 1;
+        Integer role_id = this.jdbcTemplate.queryForObject(
+                "SELECT id FROM Role WHERE role_name = ?",
+                new Object[]{personRegisterDto.getRole()},
+                Integer.class);
+        Integer person_id = this.jdbcTemplate.queryForObject("INSERT INTO Person(name, surname)  VALUES(?, ?) RETURNING id",
+                new Object[]{personRegisterDto.getName(), personRegisterDto.getSurname()},
+                Integer.class);
+        return this.jdbcTemplate.update("INSERT INTO Person_role(person_id, role_id) VALUES(?, ?)",
+                person_id,
+                role_id) == 1;
     }
 
     private Person wrapPerson(ResultSet rs, int rowNum) throws SQLException {

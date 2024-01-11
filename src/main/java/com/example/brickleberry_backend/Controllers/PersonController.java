@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api/person")
 public class PersonController {
-    private final PersonService personService;
     private final PersonRepository personRepository;
 
     @GetMapping("/all")
@@ -22,7 +21,9 @@ public class PersonController {
     }
 
     @GetMapping("/page")
-    public List<Person> getPersonsPage(@RequestParam(required = false, defaultValue = "10") int pageSize, @RequestParam() int pageNumber) {
+    public List<Person> getPersonsPage(
+            @RequestParam(required = false, defaultValue = "10") int pageSize,
+            @RequestParam() int pageNumber) {
         return personRepository.getPersonsPage(pageSize, pageNumber * pageSize);
     }
 
