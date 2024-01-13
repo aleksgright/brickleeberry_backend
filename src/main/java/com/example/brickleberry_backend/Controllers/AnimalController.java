@@ -16,7 +16,7 @@ import java.util.List;
 public class AnimalController {
     private final AnimalRepository animalRepository;
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public List<Animal> getAllAnimalsPage(
             @RequestParam(required = false, defaultValue = "10") int pageSize,
             @RequestParam() int pageNumber) {
@@ -24,7 +24,7 @@ public class AnimalController {
     }
 
 
-    @GetMapping("animalsByTerritory")
+    @GetMapping("/animalsByTerritory")
     public List<Animal> getAnimalsByTerritoryPage(
             @RequestParam int territoryId,
             @RequestParam(required = false, defaultValue = "10") int pageSize,

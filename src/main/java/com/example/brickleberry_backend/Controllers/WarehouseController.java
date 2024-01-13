@@ -16,7 +16,7 @@ import java.util.Map;
 public class WarehouseController {
     private final WarehouseRepository warehouseRepository;
 
-    @GetMapping("getByTerritoryId")
+    @GetMapping("/getByTerritoryId")
     public Map<String, Long> getAllByTerritoryId(@RequestParam int territoryId) {
         Map<String, Long> response = new HashMap<>();
         warehouseRepository.getWarehouseByTerritoryId(territoryId).forEach(w -> response.put(w.getName(), w.getResponsiblePersonId()));

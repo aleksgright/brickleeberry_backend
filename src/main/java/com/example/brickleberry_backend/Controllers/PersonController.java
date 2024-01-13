@@ -3,7 +3,6 @@ package com.example.brickleberry_backend.Controllers;
 import com.example.brickleberry_backend.Dtos.PersonRegisterDto;
 import com.example.brickleberry_backend.Entities.Person;
 import com.example.brickleberry_backend.Repositories.PersonRepository;
-import com.example.brickleberry_backend.Services.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
