@@ -1,7 +1,6 @@
 package com.example.brickleberry_backend.Repositories;
 
 import com.example.brickleberry_backend.Dtos.ResourceAddDto;
-import com.example.brickleberry_backend.Entities.Animal;
 import com.example.brickleberry_backend.Entities.Resource;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
