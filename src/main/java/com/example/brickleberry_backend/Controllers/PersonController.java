@@ -27,7 +27,7 @@ public class PersonController {
     }
 
     @GetMapping("/pageCount")
-    public int getPersonsPage(@RequestParam(required = false, defaultValue = "10") int pageSize) {
+    public int getPersonsPagesCount(@RequestParam(required = false, defaultValue = "10") int pageSize) {
         return personRepository.getPersonsPagesCount(pageSize);
     }
 

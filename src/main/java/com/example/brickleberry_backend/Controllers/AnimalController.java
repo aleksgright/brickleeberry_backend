@@ -31,4 +31,21 @@ public class AnimalController {
             @RequestParam int pageNumber) {
         return animalRepository.getAnimalsByTerritoryPaged(territoryId, pageSize, pageNumber * pageSize);
     }
+
+    @GetMapping("/pageByTerritoryIdCount")
+    public int getAnimalsByTerritoryIdPagesCount(
+            @RequestParam int territoryId,
+            @RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return animalRepository.getAnimalsByTerritoryPagesCount(territoryId, pageSize);
+    }
+
+    @GetMapping("/pageCount")
+    public int getAnimalsPagesCount(@RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return animalRepository.getAnimalsPagesCount(pageSize);
+    }
+
+    @GetMapping("/checkRegulation")
+    public boolean checkForRegulation() {
+        return animalRepository.checkForRegulation();
+    }
 }

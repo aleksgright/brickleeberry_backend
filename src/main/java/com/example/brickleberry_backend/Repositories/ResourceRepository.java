@@ -22,6 +22,13 @@ public class ResourceRepository {
         return this.jdbcTemplate.query(query, this::wrapResource);
     }
 
+    public int getResourcesByWarehouseIdPagesCount(int warehouseId, int pageSize) {
+        String rowCountSql = "SELECT ceiling(count(*)/" + pageSize + ") AS row_count " +
+                "FROM Resource WHERE warehouse_id = " + warehouseId;
+        Integer result = this.jdbcTemplate.queryForObject(rowCountSql, Integer.class);
+        return result == null ? 0 : result;
+    }
+
     public boolean addResource(ResourceAddDto resourceAddDto) {
         return this.jdbcTemplate.update("INSERT INTO Resource(name, count, warehouse_id) VALUES(?, ?, ?)",
                 resourceAddDto.getName(),

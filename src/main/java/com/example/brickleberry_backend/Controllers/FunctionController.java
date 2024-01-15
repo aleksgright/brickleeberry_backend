@@ -1,6 +1,5 @@
 package com.example.brickleberry_backend.Controllers;
 
-import com.example.brickleberry_backend.Dtos.InventarizationDataDto;
 import com.example.brickleberry_backend.Repositories.FunctionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ public class FunctionController {
     }
 
     @PostMapping("/inventarization")
-    public void callInventarization(@RequestBody InventarizationDataDto inventarizationDataDto) {
-        functionRepository.callInventarization(inventarizationDataDto);
+    public void callInventarization() {
+        functionRepository.callInventarization();
     }
 }

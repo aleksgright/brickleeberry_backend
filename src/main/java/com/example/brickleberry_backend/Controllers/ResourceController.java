@@ -22,6 +22,13 @@ public class ResourceController {
         return resourceRepository.getResourcesByWarehouseIdPaged(warehouseId, pageSize, pageNumber * pageSize);
     }
 
+    @GetMapping("/pageByWarehouseIdCount")
+    public int getAnimalsByWarehouseIdPagesCount(
+            @RequestParam int warehouseId,
+            @RequestParam(required = false, defaultValue = "10") int pageSize) {
+        return resourceRepository.getResourcesByWarehouseIdPagesCount(warehouseId, pageSize);
+    }
+
     @PostMapping("/add")
     public boolean addResource(@RequestBody ResourceAddDto resourceAddDto) {
         return resourceRepository.addResource(resourceAddDto);
