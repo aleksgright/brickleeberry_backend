@@ -26,7 +26,7 @@ public class FunctionRepository {
                 Integer.class);
         String sql = String.format("SELECT inventarization(%d, %d, %d, %d, %d)",
                 r.nextInt(50) + 5,
-                r.nextInt(50) - 9,
+                r.nextInt(17) - 10,
                 typeId,
                 territoryId,
                 personId

@@ -23,7 +23,7 @@ public class ResourceController {
     }
 
     @GetMapping("/pageByWarehouseIdCount")
-    public int getAnimalsByWarehouseIdPagesCount(
+    public int getResourceByWarehouseIdPagesCount(
             @RequestParam int warehouseId,
             @RequestParam(required = false, defaultValue = "10") int pageSize) {
         return resourceRepository.getResourcesByWarehouseIdPagesCount(warehouseId, pageSize);

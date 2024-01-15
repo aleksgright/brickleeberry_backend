@@ -50,7 +50,9 @@ public class AnimalRepository {
     }
 
     public boolean checkForRegulation() {
-        String rowCountSql = "SELECT exists(SELECT 1 FROM animal_type_territory where animal_count < 10)";
+        String rowCountSql = "SELECT exists(SELECT 1 FROM animal_type_territory" +
+                " group by animal_type_territory.animal_type_id" +
+                " having SUM(Animal_type_territory.animal_count) < 10)";
         Boolean result = this.jdbcTemplate.queryForObject(rowCountSql, Boolean.class);
         return result != null && result;
     }
