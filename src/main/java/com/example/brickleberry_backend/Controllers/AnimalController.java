@@ -3,10 +3,7 @@ package com.example.brickleberry_backend.Controllers;
 import com.example.brickleberry_backend.Entities.Animal;
 import com.example.brickleberry_backend.Repositories.AnimalRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,5 +44,10 @@ public class AnimalController {
     @GetMapping("/checkRegulation")
     public boolean checkForRegulation() {
         return animalRepository.checkForRegulation();
+    }
+
+    @PostMapping("/updateAnimal")
+    public void updateAnimal(@RequestParam long typeId, @RequestParam int territoryId, @RequestParam int change) {
+        animalRepository.updateAnimal(typeId, territoryId, change);
     }
 }

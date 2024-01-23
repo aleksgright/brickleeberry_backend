@@ -57,6 +57,13 @@ public class AnimalRepository {
         return result != null && result;
     }
 
+    public void updateAnimal(long animalTypeId, int TerritoryId, int change) {
+        this.jdbcTemplate.update(
+                "UPDATE animal_type_territory SET animal_count = animal_count + " + change +
+                        " WHERE territory_id = " + TerritoryId +
+                        " AND animal_type_id = " + animalTypeId);
+    }
+
     private Animal wrapAnimal(ResultSet rs, int rowNum) throws SQLException {
         Animal a = new Animal();
         a.setId(rs.getLong("id"));

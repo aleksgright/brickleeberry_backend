@@ -6,9 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InventarizationDataDto {
-    private int expectedCount;
     private int change;
-    private long type;
+    private long typeId;
     private int terId;
-    private int creatorId;
+    private long creatorId;
 }

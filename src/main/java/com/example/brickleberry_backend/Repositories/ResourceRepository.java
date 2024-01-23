@@ -43,6 +43,10 @@ public class ResourceRepository {
                         " AND warehouse_id = " + warehouseId) == 1;
     }
 
+//    public boolean getRfidChips() {
+//        return
+//    }
+
     private Resource wrapResource(ResultSet rs, int rowNum) throws SQLException {
         Resource r = new Resource();
         r.setId(rs.getLong("id"));
