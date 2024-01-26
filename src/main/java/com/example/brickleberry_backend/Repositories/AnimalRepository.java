@@ -15,13 +15,20 @@ public class AnimalRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public List<Animal> getAllAnimalsPaged(int limit, int offset) {
+        List<Animal> animals;
         String query = "SELECT Animal_type.id, Animal_type.type_name, Animal_type.endangered, SUM(Animal_type_territory.animal_count)" +
                 " FROM Animal_type JOIN Animal_type_territory ON Animal_type.id = Animal_type_territory.animal_type_id" +
                 " GROUP BY Animal_type.id " +
                 " ORDER BY Animal_type.id " +
                 "  LIMIT " + limit +
                 " OFFSET " + offset;
-        return this.jdbcTemplate.query(query, this::wrapAnimal);
+        String territoriesIdQuery = "Select distinct territory_id from Animal_type_territory WHERE animal_type_id = ";
+        animals = this.jdbcTemplate.query(query, this::wrapAnimal);
+        for (Animal a : animals) {
+            a.setTerritoriesId(this.jdbcTemplate.query(territoriesIdQuery + a.getId(),
+                    (rs, rowNum) -> rs.getInt("territory_id")));
+        }
+        return animals;
     }
 
     public int getAnimalsPagesCount(int pageSize) {

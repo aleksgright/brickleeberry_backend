@@ -10,4 +10,5 @@ public class InventarizationDataDto {
     private long typeId;
     private int terId;
     private long creatorId;
+    private long rfidId;
 }

@@ -43,8 +43,37 @@ public class ResourceRepository {
                         " AND warehouse_id = " + warehouseId) == 1;
     }
 
-//    public boolean getRfidChips() {
-//        return
+    public boolean getRfidChips(int change, long rfidId) {
+        String updateQuery = "Update Resource set count = count - %d where id = %d";
+        return this.jdbcTemplate.update(String.format(updateQuery, change, rfidId)) == 1;
+    }
+
+//    public void getRfidChips(int change, long rfidId) {
+//        if (change > 0) {
+//            String query = "Select count from Resource where id = " + rfidId + " and warehouse_id = ";
+//            String updateQuery = "Update Resource set count = %d where id = %d and warehouse_id = %d";
+//            String existsQuery = "Select Exists(Select count from Resource where id = %d and warehouse_id = %d)";
+//            Integer warehouseCount;
+//            List<Integer> warehouseIds = this.jdbcTemplate.query("Select id from Warehouse", (rs, rowNum) -> rs.getInt("id"));
+//            for (Integer id : warehouseIds) {
+//                Boolean check = this.jdbcTemplate.queryForObject(String.format(existsQuery, rfidId, id), Boolean.class);
+//                if (!check) {
+//                    continue;
+//                }
+//                warehouseCount = this.jdbcTemplate.queryForObject(query + id, Integer.class);
+//                if (change > warehouseCount) {
+//
+//                    this.jdbcTemplate.update(String.format(updateQuery, 0, rfidId, id));
+//                    change -= warehouseCount;
+//                } else {
+//                    this.jdbcTemplate.update(String.format(updateQuery, warehouseCount - change, rfidId, id));
+//                }
+//            }
+//        } else {
+//            Integer warehouseId = this.jdbcTemplate.queryForObject("Select id from Warehouse limit 1", Integer.class);
+//            String query = "Update Resource set count = count - %d where id = %d and warehouse_id = %d";
+//            this.jdbcTemplate.update(String.format(query, change, rfidId, warehouseId));
+//        }
 //    }
 
     private Resource wrapResource(ResultSet rs, int rowNum) throws SQLException {
